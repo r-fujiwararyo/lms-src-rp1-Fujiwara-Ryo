@@ -64,5 +64,6 @@ public interface TStudentAttendanceMapper {
 	 * @return 更新結果
 	 */
 	Boolean update(TStudentAttendance tStudentAttendance);
-
+	
+	Integer notEnterCount(Integer lmsUserId, short deleteFlg,Date trainingDate);
 }
