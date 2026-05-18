@@ -335,21 +335,18 @@ public class StudentAttendanceService {
 	}
 	
 	/**
-	 * 未入力チェック
-	 * 
+	 * 過去日に勤怠未入力がないか確認する
+	 * @return 未入力チェック
+	 * @throws ParseException
 	 */
 	public boolean notEnterCheck() throws ParseException{
 		
 		Date date = attendanceUtil.getTrainingDate();
 		
 		Integer status = tStudentAttendanceMapper.notEnterCount(loginUserDto.getLmsUserId(),Constants.DB_FLG_FALSE ,date);
-		if (status == 0) {
+		if (status > 0) {
 			return true;
 		}
 		 return false;
-
 	}
-
-
-
 }
