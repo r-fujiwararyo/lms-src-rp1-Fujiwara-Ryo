@@ -74,6 +74,7 @@
 	</div>
 
 	<script type="text/javascript" th:inline="javascript">
+	
 		$(function() {
 			$("#now").text('現在の時刻は　' + getClock() + '　です。');
 			setInterval(function() {
@@ -85,8 +86,13 @@
 			const hours = ('0' + today.getHours()).slice(-2);
 			const minutes = ('0' + today.getMinutes()).slice(-2);
 			return hours + ':' + minutes;
+			}
+				const notCheck = /*[[${notCheck}]]*/false;
+				const notCheckMessage = "過去日の勤怠に未入力があります。";
+		if (notCheck) {
+			alert(notCheckMessage);
 		}
 	</script>
-
+	
 </body>
 </html>
