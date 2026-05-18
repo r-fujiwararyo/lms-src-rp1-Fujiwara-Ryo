@@ -45,11 +45,12 @@ public class AttendanceController {
 		// 勤怠一覧の取得
 		List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
+		//		藤原龍 – Task.25
+		//		過去日に勤怠が未入力がないか確認
 		boolean notCheck = studentAttendanceService.notEnterCheck();
-		
-		
+
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
-		model.addAttribute("notCheck",notCheck);
+		model.addAttribute("notCheck", notCheck);
 		return "attendance/detail";
 	}
 
