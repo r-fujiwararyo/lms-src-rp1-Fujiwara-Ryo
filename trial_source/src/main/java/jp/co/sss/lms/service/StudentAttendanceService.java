@@ -219,7 +219,10 @@ public class StudentAttendanceService {
 		attendanceForm.setUserName(loginUserDto.getUserName());
 		attendanceForm.setLeaveFlg(loginUserDto.getLeaveFlg());
 		attendanceForm.setBlankTimes(attendanceUtil.setBlankTime());
-
+//		Task_26_藤原龍
+		attendanceForm.setHourTimes(attendanceUtil.getHourMap());
+		attendanceForm.setMinuteTimes(attendanceUtil.getMinuteMap());
+		
 		// 途中退校している場合のみ設定
 		if (loginUserDto.getLeaveDate() != null) {
 			attendanceForm
@@ -235,9 +238,16 @@ public class StudentAttendanceService {
 					.setStudentAttendanceId(attendanceManagementDto.getStudentAttendanceId());
 			dailyAttendanceForm
 					.setTrainingDate(dateUtil.toString(attendanceManagementDto.getTrainingDate()));
-			dailyAttendanceForm
-					.setTrainingStartTime(attendanceManagementDto.getTrainingStartTime());
+			dailyAttendanceForm.setTrainingStartTime(attendanceManagementDto.getTrainingStartTime());
 			dailyAttendanceForm.setTrainingEndTime(attendanceManagementDto.getTrainingEndTime());
+//			Task26_藤原龍
+//			dailyAttendanceForm.setTrainingStartTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTime()));
+//			
+//			dailyAttendanceForm.setTrainingStartTimeMinute(attendanceUtil.getMinute(attendanceManagementDto.getTrainingStartTime()));
+//			
+//			dailyAttendanceForm.setTrainingEndTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingEndTime()));
+//			
+//			dailyAttendanceForm.setTrainingEndTimeMinute(attendanceUtil.getMinute(attendanceManagementDto.getTrainingEndTime()));
 			if (attendanceManagementDto.getBlankTime() != null) {
 				dailyAttendanceForm.setBlankTime(attendanceManagementDto.getBlankTime());
 				dailyAttendanceForm.setBlankTimeValue(String.valueOf(
@@ -351,4 +361,22 @@ public class StudentAttendanceService {
 		}
 		return false;
 	}
-}
+		public void formatConversion(AttendanceForm attendanceForm) {
+			
+			for (DailyAttendanceForm list: attendanceForm.getAttendanceList()) {
+			
+				if (list.getTrainingStartTimeHour() != null && list.getTrainingStartTimeMinute() != null) {
+					String timeString = String.format("%02d:%02d", list.getTrainingStartTimeHour(),list.getTrainingStartTimeMinute());
+					list.setTrainingStartTime(timeString);
+//					
+				}
+				if (list.getTrainingEndTimeHour() != null && list.getTrainingEndTimeMinute() != null) {
+					String timeString = String.format("%02d:%02d", list.getTrainingEndTimeHour(),list.getTrainingEndTimeMinute());
+					list.setTrainingEndTime(timeString);
+				}
+			}
+		}
+			
+	
+	}
+
