@@ -23,7 +23,6 @@ public class AttendanceUtil {
 	@Autowired
 	private MSectionMapper mSectionMapper;
 
-
 	/**
 	 * SSS定時・出退勤時間を元に、遅刻早退を判定をする
 	 * 
@@ -147,7 +146,7 @@ public class AttendanceUtil {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Task26_藤原龍
 	 * 時間のプルダウン生成
@@ -157,11 +156,11 @@ public class AttendanceUtil {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
 		map.put(null, "");
 		for (int i = 0; i < 24; i++) {
-			map.put(i, String.format("%02d",i));
+			map.put(i, String.format("%02d", i));
 		}
 		return map;
 	}
-	
+
 	/**
 	 * Task26_藤原龍
 	 * 分のプルダウン生成
@@ -175,24 +174,25 @@ public class AttendanceUtil {
 		}
 		return map;
 	}
-	
+
 	/**
 	 * Task26_藤原龍
-	 * 時間（時）の切り出し
-	 * 
+	 * 時間（時）の抜き出し
+	 * @param hourTimes
+	 * @return 0から2文字目を抜き出す
 	 */
-	public Integer getHour(String startHour) {
-		return Integer.parseInt(startHour.substring(0, 2));
-	}
-	
-	/**
-	 * Task26_藤原龍
-	 * 時間(分)の切り出し
-	 * @param startMinute
-	 * @return
-	 */
-	public Integer getMinute(String startMinute) {
-		return Integer.parseInt(startMinute.substring(2,5));
+
+	public Integer getHour(String hourTimes) {
+		return Integer.parseInt(hourTimes.substring(0, 2));
 	}
 
+	/**
+	 * Task26_藤原龍
+	 * 時間(分)の抜き出し
+	 * @param minuteTimes
+	 * @return 3から5文字目を抜き出す
+	 */
+	public Integer getMinute(String minuteTimes) {
+		return Integer.parseInt(minuteTimes.substring(3, 5));
+	}
 }
