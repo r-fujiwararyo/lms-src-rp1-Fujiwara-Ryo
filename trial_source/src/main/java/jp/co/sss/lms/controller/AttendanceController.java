@@ -136,7 +136,9 @@ public class AttendanceController {
 	@RequestMapping(path = "/update", params = "complete", method = RequestMethod.POST)
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
-
+		//		Task26_藤原龍
+		//		入力された出退勤の{時間}{分}を取得
+		studentAttendanceService.formatConversion(attendanceForm);
 		// 更新
 		String message = studentAttendanceService.update(attendanceForm);
 		model.addAttribute("message", message);
