@@ -241,14 +241,14 @@ public class StudentAttendanceService {
 			dailyAttendanceForm.setTrainingStartTime(attendanceManagementDto.getTrainingStartTime());
 			dailyAttendanceForm.setTrainingEndTime(attendanceManagementDto.getTrainingEndTime());
 			//			Task26_藤原龍
-			if (!attendanceManagementDto.getTrainingStartTime().isEmpty()) {
+			if (attendanceManagementDto.getTrainingStartTime() != null && !attendanceManagementDto.getTrainingStartTime().isEmpty()) {
 				dailyAttendanceForm.setTrainingStartTimeHour(
 						attendanceUtil.getHour(attendanceManagementDto.getTrainingStartTime()));
 				dailyAttendanceForm.setTrainingStartTimeMinute(
 						attendanceUtil.getMinute(attendanceManagementDto.getTrainingStartTime()));
 			}
 
-			if (!attendanceManagementDto.getTrainingEndTime().isEmpty()) {
+			if (attendanceManagementDto.getTrainingEndTime() != null && !attendanceManagementDto.getTrainingEndTime().isEmpty()) {
 				dailyAttendanceForm
 						.setTrainingEndTimeHour(attendanceUtil.getHour(attendanceManagementDto.getTrainingEndTime()));
 				dailyAttendanceForm.setTrainingEndTimeMinute(
