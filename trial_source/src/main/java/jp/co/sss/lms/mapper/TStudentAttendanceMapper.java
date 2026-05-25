@@ -66,8 +66,9 @@ public interface TStudentAttendanceMapper {
 	Boolean update(TStudentAttendance tStudentAttendance);
 
 	/**
-	 * 藤原龍 Task25
 	 * 勤怠情報 （受講生入力) 未入力件数
+	 * 
+	 * @author 藤原龍 Task25
 	 * @param lmsUserId
 	 * @param deleteFlg
 	 * @param trainingDate
