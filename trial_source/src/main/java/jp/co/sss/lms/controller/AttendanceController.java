@@ -14,6 +14,7 @@ import jp.co.sss.lms.dto.AttendanceManagementDto;
 import jp.co.sss.lms.dto.LoginUserDto;
 import jp.co.sss.lms.form.AttendanceForm;
 import jp.co.sss.lms.service.StudentAttendanceService;
+import jp.co.sss.lms.util.AttendanceUtil;
 import jp.co.sss.lms.util.Constants;
 
 /**
@@ -29,6 +30,8 @@ public class AttendanceController {
 	private StudentAttendanceService studentAttendanceService;
 	@Autowired
 	private LoginUserDto loginUserDto;
+	@Autowired
+	private AttendanceUtil attendanceUtil;
 
 	/**
 	 * 勤怠管理画面 初期表示
@@ -139,6 +142,16 @@ public class AttendanceController {
 		//		Task26_藤原龍
 		//		入力された出退勤の{時間}{分}を取得
 		studentAttendanceService.formatConversion(attendanceForm);
+
+		//		Task27_藤原龍
+		//		勤怠管理直接変更画面エラーチェック
+		studentAttendanceService.updateInputCheck(attendanceForm, result);
+		if (result.hasErrors()) {
+			attendanceForm.setBlankTimes(attendanceUtil.setBlankTime());
+			attendanceForm.setHourTimes(attendanceUtil.getHourMap());
+			attendanceForm.setMinuteTimes(attendanceUtil.getMinuteMap());
+			return "attendance/update";
+		}
 		// 更新
 		String message = studentAttendanceService.update(attendanceForm);
 		model.addAttribute("message", message);
